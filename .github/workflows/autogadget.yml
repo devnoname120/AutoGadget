@@ -1,30 +1,27 @@
-name: Build FridaGadget Loader
+name: Build FridaGadgetLoader
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
-  build-deb:
+  build:
     runs-on: macos-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Theos
         uses: Randomblock1/theos-action@v1
+        with:
+          theos-dir: theos
+          cache: true
 
-      - name: Build Package
+      - name: Build package
         run: |
           cd FridaGadgetLoader
-          make clean
           make package FINALPACKAGE=1
 
-      - name: Upload DEB Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: FridaGadgetLoader_${{ github.sha }}
+          name: FridaGadgetLoader
           path: FridaGadgetLoader/packages/*.deb
-          retention-days: 7
