@@ -3,7 +3,7 @@ TARGET = iphine:clang:latest:14.0
 INSTALL_TARGET_PROCESSES = SpringBoard
 DEBUG = 0
 
-FRIDA_VERSION = 16.2.1
+FRIDA_VERSION = 16.7.13
 GADGET_URL = https://github.com/frida/frida/releases/download/$(FRIDA_VERSION)/frida-gadget-$(FRIDA_VERSION)-ios-universal.dylib.xz
 
 include $(THEOS)/makefiles/common.mk
