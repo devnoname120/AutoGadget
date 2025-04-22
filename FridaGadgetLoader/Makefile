@@ -1,12 +1,17 @@
-ARCHS = arm64 arm64e
-TARGET = iphine:clang:latest:14.0
-INSTALL_TARGET_PROCESSES = SpringBoard
-DEBUG = 0
+FINALPACKAGE=1
+
+# INSTALL_TARGET_PROCESSES = SpringBoard
+ARCHS = arm64
+# THEOS_PACKAGE_SCHEME=roothide
+TARGET = iphone:clang:latest:15.0
+include $(THEOS)/makefiles/common.mk
+
+TARGET_CC = xcrun -sdk iphoneos clang
+TARGET_CXX = xcrun -sdk iphoneos clang++
+TARGET_LD = xcrun -sdk iphoneos clang++
 
 FRIDA_VERSION = 16.7.13
 GADGET_URL = https://github.com/frida/frida/releases/download/$(FRIDA_VERSION)/frida-gadget-$(FRIDA_VERSION)-ios-universal.dylib.xz
-
-include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = FridaGadgetLoader
 
