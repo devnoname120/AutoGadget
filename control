@@ -1,0 +1,9 @@
+Package: com.example.fridagadgetloader
+Name: FridaGadgetLoader
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Inject FridaGadget into apps
+Maintainer: Your Name <your@email.com>
+Author: Your Name <your@email.com>
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000)
