@@ -22,7 +22,7 @@ jobs:
           orion: false
 
       - name: Build package
-        working-directory: FridaGadgetTweak
+        working-directory: FridaGadgetLoader
         run: |
           make clean
           make package FINALPACKAGE=1
