@@ -1,0 +1,27 @@
+name: Build FridaGadgetLoader
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Theos
+        uses: Randomblock1/theos-action@v1
+        with:
+          theos-dir: theos
+          cache: true
+
+      - name: Build package
+        run: |
+          cd FridaGadgetLoader
+          make package FINALPACKAGE=1
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: FridaGadgetLoader
+          path: FridaGadgetLoader/packages/*.deb
