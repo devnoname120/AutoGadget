@@ -23,3 +23,5 @@ before-package::
 	codesign -f -s "Apple Development" FridaGadget.dylib
 	mkdir -p $(THEOS_STAGING_DIR)/usr/lib
 	cp FridaGadget.dylib $(THEOS_STAGING_DIR)/usr/lib/
+after-install::
+	install.exec "killall -9 SpringBoard"
