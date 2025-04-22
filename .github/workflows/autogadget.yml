@@ -8,32 +8,23 @@ on:
 jobs:
   build-deb:
     runs-on: macos-latest
-    timeout-minutes: 15
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Theos
-        uses: Randomblock1/theos-action@v2
-        with:
-          theos-dir: theos
-          ldid-install: true
-          cache-key: ${{ runner.os }}-theos-v1
+        uses: Randomblock1/theos-action@v1
 
       - name: Build Package
         run: |
           cd FridaGadgetLoader
           make clean
-          THEOS_PACKAGE_SCHEME=rootless make package FINALPACKAGE=1
+          make package FINALPACKAGE=1
 
       - name: Upload DEB Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FridaGadgetLoader_${{ github.sha }}
-          path: |
-            FridaGadgetLoader/packages/*.deb
-            FridaGadgetLoader/FridaGadget.dylib
+          path: FridaGadgetLoader/packages/*.deb
           retention-days: 7
