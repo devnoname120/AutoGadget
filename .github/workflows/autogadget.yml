@@ -7,17 +7,20 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Setup Theos
         uses: Randomblock1/theos-action@v1
+        with:
+          theos-dir: theos
+          ldid-install: true
 
       - name: Build package
-        working-directory: FridaGadgetLoader
+        working-directory: FridaGadgetTweak
         run: |
           make clean
           make package FINALPACKAGE=1
 
       - uses: actions/upload-artifact@v4
         with:
-          name: FridaGadget
-          path: FridaGadgetLoader/packages/*.deb
+          name: FridaGadgetLoader
+          path: FridaGadgetTweak/packages/*.deb
