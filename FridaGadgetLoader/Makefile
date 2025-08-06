@@ -22,14 +22,14 @@ FridaGadgetLoader_EXTRA_FRAMEWORKS = CydiaSubstrate
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 before-package::
-	# FridaGadget herunterladen & signieren
+	# Download FridaGadget dylib (unsigned)
 	curl -L $(GADGET_URL) | xz -d > FridaGadget.dylib
-	codesign -f -s "Apple Development" --entitlements ent.plist FridaGadget.dylib
-	
-	# Paketstruktur erstellen
+	# codesign -f -s "Apple Development" --entitlements ent.plist FridaGadget.dylib
+
+	# Prepare package structure
 	mkdir -p $(THEOS_STAGING_DIR)/Library/MobileSubstrate/DynamicLibraries
 	mkdir -p $(THEOS_STAGING_DIR)/usr/lib
-	
-	# Dateien kopieren
+
+	# Copy FridaGadget and plist
 	cp FridaGadget.dylib $(THEOS_STAGING_DIR)/usr/lib/
 	cp FridaGadgetLoader.plist $(THEOS_STAGING_DIR)/Library/MobileSubstrate/DynamicLibraries/
